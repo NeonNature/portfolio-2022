@@ -18,9 +18,12 @@ import {
     Vignette,
 } from "@react-three/postprocessing";
 import "../styles/composition.scss";
+import { useSpring, animated } from "@react-spring/three";
 
 const Hexagon = ({ emissiveIntensity, position }) => {
     const [hovered, setHover] = useState(false);
+
+    const { color } = useSpring({ color: hovered ? "#FFBC42" : "royalblue" });
 
     return (
         <Cylinder
@@ -31,11 +34,11 @@ const Hexagon = ({ emissiveIntensity, position }) => {
             onPointerOver={(e) => (e.stopPropagation(), setHover(true))}
             onPointerOut={(e) => setHover(false)}
         >
-            <meshStandardMaterial
+            <animated.meshStandardMaterial
                 // emissive="red"
                 emissiveIntensity={emissiveIntensity}
                 toneMapped={false}
-                color={hovered ? "#FFBC42" : "#9b59b6"}
+                color={color}
             />
         </Cylinder>
     );
@@ -64,7 +67,7 @@ const Composition = () => {
             step: 1,
         },
         cameraZ: {
-            value: -12,
+            value: -35,
             min: -100,
             max: 100,
             step: 1,
@@ -97,11 +100,7 @@ const Composition = () => {
 
     return (
         <div className={"container"}>
-            <Canvas
-                dpr={[1, 1.5]}
-                shadows
-                camera={{ position: [0, 5, 15], fov: 50 }}
-            >
+            <Canvas>
                 <EffectComposer>
                     <Bloom
                         luminanceThreshold={0}
