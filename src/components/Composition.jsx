@@ -20,18 +20,22 @@ import {
 import "../styles/composition.scss";
 
 const Hexagon = ({ emissiveIntensity, position }) => {
+    const [hovered, setHover] = useState(false);
+
     return (
         <Cylinder
             position={position}
             // rotateZ={Math.PI / 2}
             rotation={[Math.PI / 2, 0, 0]}
             args={[3, 3, 1, 6]}
+            onPointerOver={(e) => (e.stopPropagation(), setHover(true))}
+            onPointerOut={(e) => setHover(false)}
         >
             <meshStandardMaterial
                 // emissive="red"
                 emissiveIntensity={emissiveIntensity}
                 toneMapped={false}
-                color="#9b59b6"
+                color={hovered ? "#FFBC42" : "#9b59b6"}
             />
         </Cylinder>
     );
@@ -106,7 +110,7 @@ const Composition = () => {
                     />
                 </EffectComposer>
                 <Hexagon emissiveIntensity position={[1, 1, 1]} />
-                <Hexagon emissiveIntensity position={[2, 2, 1]} />
+                <Hexagon emissiveIntensity position={[3, 5, 1]} />
                 <OrbitControls makeDefault />
                 <color attach="background" args={["#171720"]} />
                 <ambientLight />
