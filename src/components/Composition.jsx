@@ -1,7 +1,7 @@
 import React, { Suspense, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import {
-    PerspectiveCamera,
+    OrthographicCamera,
     Stage,
     Environment,
     OrbitControls,
@@ -44,6 +44,15 @@ const Hexagon = ({ emissiveIntensity, position }) => {
     );
 };
 
+const Hexagons = ({ emissiveIntensity }) => {
+    return Array.from({ length: 15 }, (_, i) => (
+        <Hexagon
+            emissiveIntensity
+            position={[i * 2.75 + Math.round(i / 5) * 2, i * 4.75, 1]}
+        />
+    ));
+};
+
 const Composition = () => {
     const {
         cameraX,
@@ -61,7 +70,7 @@ const Composition = () => {
             step: 1,
         },
         cameraY: {
-            value: 5,
+            value: 0,
             min: -100,
             max: 100,
             step: 1,
@@ -108,12 +117,16 @@ const Composition = () => {
                         // height={300}
                     />
                 </EffectComposer>
-                <Hexagon emissiveIntensity position={[1, 1, 1]} />
-                <Hexagon emissiveIntensity position={[3, 5, 1]} />
+                <Hexagon emissiveIntensity position={[-2.75, -4.75, 0]} />
+                <Hexagon emissiveIntensity position={[0, 0, 0]} />
+                <Hexagon emissiveIntensity position={[2.75, 4.75, 0]} />
+                <Hexagon emissiveIntensity position={[5.5, 9.5, 0]} />
+                {/* <Hexagons emissiveIntensity /> */}
                 <OrbitControls makeDefault />
                 <color attach="background" args={["#171720"]} />
                 <ambientLight />
-                <PerspectiveCamera
+                <OrthographicCamera
+                    zoom={20}
                     position={[cameraX, cameraY, cameraZ]}
                     rotation={[rotationX, rotationY, rotationZ]}
                     makeDefault
