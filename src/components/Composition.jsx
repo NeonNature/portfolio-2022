@@ -1,5 +1,5 @@
 import React, { Suspense, useRef, useState, useEffect } from "react";
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
 import {
     PerspectiveCamera,
     OrthographicCamera,
@@ -7,6 +7,9 @@ import {
     Environment,
     OrbitControls,
     Cylinder,
+    Text3D,
+    useScroll,
+    useCamera,
 } from "@react-three/drei";
 import * as THREE from "three";
 import { Vector3 } from "three";
@@ -22,7 +25,7 @@ import "../styles/composition.scss";
 import { useSpring, animated } from "@react-spring/three";
 import anime from "animejs/lib/anime.es.js";
 
-const Hexagon = ({ emissiveIntensity, x, y }) => {
+const Hexagon = ({ x, y }) => {
     const [hovered, setHover] = useState(false);
     const ref = useRef();
 
@@ -33,7 +36,7 @@ const Hexagon = ({ emissiveIntensity, x, y }) => {
     // };
 
     const { color, points, position, args } = useSpring({
-        color: hovered ? "royalblue" : "#171720",
+        color: hovered ? "royalblue" : "#000",
         points: hovered ? 6 : 6,
         position: hovered ? [x * 2.75, y * 4.75, -5] : [x * 2.75, y * 4.75, 0],
         args: hovered ? [3, 3, 5, 6] : [3, 3, 5, 6],
@@ -80,242 +83,277 @@ const Hexagon = ({ emissiveIntensity, x, y }) => {
             onPointerOut={(e) => setHover(false)}
         >
             <animated.cylinderGeometry args={[3, 3, 5, 6]} />
-            <animated.meshStandardMaterial color={color} />
+            <animated.meshStandardMaterial
+                color={color}
+                emissive={color}
+                emissiveIntensity={2}
+                toneMapped={false}
+            />
         </animated.mesh>
     );
 };
 
-const Hexagons = ({ emissiveIntensity }) => {
+const Hexagons = () => {
     return Array.from({ length: 15 }, (_, i) => (
-        <Hexagon
-            emissiveIntensity
-            position={[i * 2.75 + Math.round(i / 5) * 2, i * 4.75, 1]}
-        />
+        <Hexagon position={[i * 2.75 + Math.round(i / 5) * 2, i * 4.75, 1]} />
     ));
 };
 
 const Composition = () => {
-    const {
-        cameraX,
-        cameraY,
-        cameraZ,
-        rotationX,
-        rotationY,
-        rotationZ,
-        emissiveIntensity,
-    } = useControls({
-        cameraX: {
-            value: 0,
-            min: -100,
-            max: 100,
-            step: 1,
-        },
-        cameraY: {
-            value: 0,
-            min: -100,
-            max: 100,
-            step: 1,
-        },
-        cameraZ: {
-            value: -35,
-            min: -100,
-            max: 100,
-            step: 1,
-        },
-        rotationX: {
-            value: 0.5,
-            min: -Math.PI,
-            max: Math.PI,
-            step: 0.05,
-        },
-        rotationY: {
-            value: Math.PI,
-            min: -Math.PI,
-            max: Math.PI,
-            step: 0.05,
-        },
-        rotationZ: {
-            value: 0,
-            min: -Math.PI,
-            max: Math.PI,
-            step: 0.05,
-        },
-        emissiveIntensity: {
-            value: 0,
-            min: -100,
-            max: 100,
-            step: 1,
-        },
+    const scroll = useScroll();
+    const { camera } = useThree();
+    const [isPhase2, setIsPhase2] = useState(false);
+
+    const { backgroundColor } = useSpring({
+        // backgroundColor: isPhase2 ? "#000000" : "#FFFFFF",
+        backgroundColor: "#000",
     });
 
+    useFrame(() => {
+        const rotationX = 1 - scroll.range(0, 1 / 5);
+        camera.rotation.set(rotationX, 0, 0);
+
+        console.log(scroll.visible(1 / 5, 5 / 5));
+        console.log(backgroundColor.get());
+        setIsPhase2((_) => scroll.visible(1 / 5, 5 / 5));
+    });
+
+    const { cameraX, cameraY, cameraZ, rotationX, rotationY, rotationZ } =
+        useControls({
+            cameraX: {
+                value: 0,
+                min: -100,
+                max: 100,
+                step: 1,
+            },
+            cameraY: {
+                value: 0,
+                min: -100,
+                max: 100,
+                step: 1,
+            },
+            cameraZ: {
+                value: 35,
+                min: -100,
+                max: 100,
+                step: 1,
+            },
+            rotationX: {
+                value: 1,
+                min: -Math.PI,
+                max: Math.PI,
+                step: 0.05,
+            },
+            rotationY: {
+                value: 0,
+                min: -Math.PI,
+                max: Math.PI,
+                step: 0.05,
+            },
+            rotationZ: {
+                value: 0,
+                min: -Math.PI,
+                max: Math.PI,
+                step: 0.05,
+            },
+        });
+
     return (
-        <div className={"container"}>
-            <Canvas>
-                <EffectComposer>
-                    <Bloom
-                        luminanceThreshold={0}
-                        luminanceSmoothing={0.9}
-                        // height={300}
-                    />
-                </EffectComposer>
-
-                <Hexagon emissiveIntensity x={14} y={4} />
-                <Hexagon emissiveIntensity x={12} y={4} />
-                <Hexagon emissiveIntensity x={10} y={4} />
-                <Hexagon emissiveIntensity x={8} y={4} />
-                <Hexagon emissiveIntensity x={6} y={4} />
-                <Hexagon emissiveIntensity x={4} y={4} />
-                <Hexagon emissiveIntensity x={2} y={4} />
-                <Hexagon emissiveIntensity x={0} y={4} />
-                <Hexagon emissiveIntensity x={-2} y={4} />
-                <Hexagon emissiveIntensity x={-4} y={4} />
-                <Hexagon emissiveIntensity x={-6} y={4} />
-                <Hexagon emissiveIntensity x={-8} y={4} />
-                <Hexagon emissiveIntensity x={-10} y={4} />
-                <Hexagon emissiveIntensity x={-12} y={4} />
-                <Hexagon emissiveIntensity x={-14} y={4} />
-
-                <Hexagon emissiveIntensity x={13} y={3} />
-                <Hexagon emissiveIntensity x={11} y={3} />
-                <Hexagon emissiveIntensity x={9} y={3} />
-                <Hexagon emissiveIntensity x={7} y={3} />
-                <Hexagon emissiveIntensity x={5} y={3} />
-                <Hexagon emissiveIntensity x={3} y={3} />
-                <Hexagon emissiveIntensity x={1} y={3} />
-                <Hexagon emissiveIntensity x={-1} y={3} />
-                <Hexagon emissiveIntensity x={-3} y={3} />
-                <Hexagon emissiveIntensity x={-5} y={3} />
-                <Hexagon emissiveIntensity x={-7} y={3} />
-                <Hexagon emissiveIntensity x={-9} y={3} />
-                <Hexagon emissiveIntensity x={-11} y={3} />
-                <Hexagon emissiveIntensity x={-13} y={3} />
-
-                <Hexagon emissiveIntensity x={14} y={2} />
-                <Hexagon emissiveIntensity x={12} y={2} />
-                <Hexagon emissiveIntensity x={10} y={2} />
-                <Hexagon emissiveIntensity x={8} y={2} />
-                <Hexagon emissiveIntensity x={6} y={2} />
-                <Hexagon emissiveIntensity x={4} y={2} />
-                <Hexagon emissiveIntensity x={2} y={2} />
-                <Hexagon emissiveIntensity x={0} y={2} />
-                <Hexagon emissiveIntensity x={-2} y={2} />
-                <Hexagon emissiveIntensity x={-4} y={2} />
-                <Hexagon emissiveIntensity x={-6} y={2} />
-                <Hexagon emissiveIntensity x={-8} y={2} />
-                <Hexagon emissiveIntensity x={-10} y={2} />
-                <Hexagon emissiveIntensity x={-12} y={2} />
-                <Hexagon emissiveIntensity x={-14} y={2} />
-
-                <Hexagon emissiveIntensity x={13} y={1} />
-                <Hexagon emissiveIntensity x={11} y={1} />
-                <Hexagon emissiveIntensity x={9} y={1} />
-                <Hexagon emissiveIntensity x={7} y={1} />
-                <Hexagon emissiveIntensity x={5} y={1} />
-                <Hexagon emissiveIntensity x={3} y={1} />
-                <Hexagon emissiveIntensity x={1} y={1} />
-                <Hexagon emissiveIntensity x={-1} y={1} />
-                <Hexagon emissiveIntensity x={-3} y={1} />
-                <Hexagon emissiveIntensity x={-5} y={1} />
-                <Hexagon emissiveIntensity x={-7} y={1} />
-                <Hexagon emissiveIntensity x={-9} y={1} />
-                <Hexagon emissiveIntensity x={-11} y={1} />
-                <Hexagon emissiveIntensity x={-13} y={1} />
-
-                <Hexagon emissiveIntensity x={14} y={0} />
-                <Hexagon emissiveIntensity x={12} y={0} />
-                <Hexagon emissiveIntensity x={10} y={0} />
-                <Hexagon emissiveIntensity x={8} y={0} />
-                <Hexagon emissiveIntensity x={6} y={0} />
-                <Hexagon emissiveIntensity x={4} y={0} />
-                <Hexagon emissiveIntensity x={2} y={0} />
-                <Hexagon emissiveIntensity x={0} y={0} />
-                <Hexagon emissiveIntensity x={-2} y={0} />
-                <Hexagon emissiveIntensity x={-4} y={0} />
-                <Hexagon emissiveIntensity x={-6} y={0} />
-                <Hexagon emissiveIntensity x={-8} y={0} />
-                <Hexagon emissiveIntensity x={-10} y={0} />
-                <Hexagon emissiveIntensity x={-12} y={0} />
-                <Hexagon emissiveIntensity x={-14} y={0} />
-
-                <Hexagon emissiveIntensity x={13} y={-1} />
-                <Hexagon emissiveIntensity x={11} y={-1} />
-                <Hexagon emissiveIntensity x={9} y={-1} />
-                <Hexagon emissiveIntensity x={7} y={-1} />
-                <Hexagon emissiveIntensity x={5} y={-1} />
-                <Hexagon emissiveIntensity x={3} y={-1} />
-                <Hexagon emissiveIntensity x={1} y={-1} />
-                <Hexagon emissiveIntensity x={-1} y={-1} />
-                <Hexagon emissiveIntensity x={-3} y={-1} />
-                <Hexagon emissiveIntensity x={-5} y={-1} />
-                <Hexagon emissiveIntensity x={-7} y={-1} />
-                <Hexagon emissiveIntensity x={-9} y={-1} />
-                <Hexagon emissiveIntensity x={-11} y={-1} />
-                <Hexagon emissiveIntensity x={-13} y={-1} />
-
-                <Hexagon emissiveIntensity x={14} y={-2} />
-                <Hexagon emissiveIntensity x={12} y={-2} />
-                <Hexagon emissiveIntensity x={10} y={-2} />
-                <Hexagon emissiveIntensity x={8} y={-2} />
-                <Hexagon emissiveIntensity x={6} y={-2} />
-                <Hexagon emissiveIntensity x={4} y={-2} />
-                <Hexagon emissiveIntensity x={2} y={-2} />
-                <Hexagon emissiveIntensity x={0} y={-2} />
-                <Hexagon emissiveIntensity x={-2} y={-2} />
-                <Hexagon emissiveIntensity x={-4} y={-2} />
-                <Hexagon emissiveIntensity x={-6} y={-2} />
-                <Hexagon emissiveIntensity x={-8} y={-2} />
-                <Hexagon emissiveIntensity x={-10} y={-2} />
-                <Hexagon emissiveIntensity x={-12} y={-2} />
-                <Hexagon emissiveIntensity x={-14} y={-2} />
-
-                <Hexagon emissiveIntensity x={13} y={-3} />
-                <Hexagon emissiveIntensity x={11} y={-3} />
-                <Hexagon emissiveIntensity x={9} y={-3} />
-                <Hexagon emissiveIntensity x={7} y={-3} />
-                <Hexagon emissiveIntensity x={5} y={-3} />
-                <Hexagon emissiveIntensity x={3} y={-3} />
-                <Hexagon emissiveIntensity x={1} y={-3} />
-                <Hexagon emissiveIntensity x={-1} y={-3} />
-                <Hexagon emissiveIntensity x={-3} y={-3} />
-                <Hexagon emissiveIntensity x={-5} y={-3} />
-                <Hexagon emissiveIntensity x={-7} y={-3} />
-                <Hexagon emissiveIntensity x={-9} y={-3} />
-                <Hexagon emissiveIntensity x={-11} y={-3} />
-                <Hexagon emissiveIntensity x={-13} y={-3} />
-
-                <Hexagon emissiveIntensity x={14} y={-4} />
-                <Hexagon emissiveIntensity x={12} y={-4} />
-                <Hexagon emissiveIntensity x={10} y={-4} />
-                <Hexagon emissiveIntensity x={8} y={-4} />
-                <Hexagon emissiveIntensity x={6} y={-4} />
-                <Hexagon emissiveIntensity x={4} y={-4} />
-                <Hexagon emissiveIntensity x={2} y={-4} />
-                <Hexagon emissiveIntensity x={0} y={-4} />
-                <Hexagon emissiveIntensity x={-2} y={-4} />
-                <Hexagon emissiveIntensity x={-4} y={-4} />
-                <Hexagon emissiveIntensity x={-6} y={-4} />
-                <Hexagon emissiveIntensity x={-8} y={-4} />
-                <Hexagon emissiveIntensity x={-10} y={-4} />
-                <Hexagon emissiveIntensity x={-12} y={-4} />
-                <Hexagon emissiveIntensity x={-14} y={-4} />
-
-                <OrbitControls makeDefault />
-                <color attach="background" args={["#171720"]} />
-                <ambientLight />
-                <pointLight position={[10, 10, 10]} />
-                <OrthographicCamera
-                    zoom={20}
-                    position={[cameraX, cameraY, cameraZ]}
-                    rotation={[rotationX, rotationY, rotationZ]}
-                    makeDefault
+        <>
+            <EffectComposer>
+                <Bloom
+                    luminanceThreshold={0}
+                    luminanceSmoothing={0.9}
+                    // height={300}
                 />
-                {/* <PerspectiveCamera
-                    position={[cameraX, cameraY, cameraZ]}
-                    rotation={[rotationX, rotationY, rotationZ]}
-                    makeDefault
-                /> */}
-            </Canvas>
-        </div>
+            </EffectComposer>
+
+            <Text3D
+                curveSegments={32}
+                bevelEnabled
+                bevelSize={0.04}
+                bevelThickness={0.1}
+                height={0.5}
+                lineHeight={0.5}
+                letterSpacing={-0.06}
+                size={1.5}
+                font="/static/fonts/Play_Regular.json"
+                position={[0, 0, 15]}
+            >
+                hi.
+                <meshStandardMaterial color={"white"} />
+            </Text3D>
+
+            <Text3D
+                curveSegments={32}
+                bevelEnabled
+                bevelSize={0.04}
+                bevelThickness={0.1}
+                height={0.5}
+                lineHeight={0.5}
+                letterSpacing={-0.06}
+                size={1.5}
+                font="/static/fonts/Play_Regular.json"
+                position={[0, -5, 15]}
+            >
+                I'm Min Maung Maung
+                <meshStandardMaterial color={"white"} />
+            </Text3D>
+
+            <Hexagon x={14} y={4} />
+            <Hexagon x={12} y={4} />
+            <Hexagon x={10} y={4} />
+            <Hexagon x={8} y={4} />
+            <Hexagon x={6} y={4} />
+            <Hexagon x={4} y={4} />
+            <Hexagon x={2} y={4} />
+            <Hexagon x={0} y={4} />
+            <Hexagon x={-2} y={4} />
+            <Hexagon x={-4} y={4} />
+            <Hexagon x={-6} y={4} />
+            <Hexagon x={-8} y={4} />
+            <Hexagon x={-10} y={4} />
+            <Hexagon x={-12} y={4} />
+            <Hexagon x={-14} y={4} />
+
+            <Hexagon x={13} y={3} />
+            <Hexagon x={11} y={3} />
+            <Hexagon x={9} y={3} />
+            <Hexagon x={7} y={3} />
+            <Hexagon x={5} y={3} />
+            <Hexagon x={3} y={3} />
+            <Hexagon x={1} y={3} />
+            <Hexagon x={-1} y={3} />
+            <Hexagon x={-3} y={3} />
+            <Hexagon x={-5} y={3} />
+            <Hexagon x={-7} y={3} />
+            <Hexagon x={-9} y={3} />
+            <Hexagon x={-11} y={3} />
+            <Hexagon x={-13} y={3} />
+
+            <Hexagon x={14} y={2} />
+            <Hexagon x={12} y={2} />
+            <Hexagon x={10} y={2} />
+            <Hexagon x={8} y={2} />
+            <Hexagon x={6} y={2} />
+            <Hexagon x={4} y={2} />
+            <Hexagon x={2} y={2} />
+            <Hexagon x={0} y={2} rotation={[rotationX, rotationY, rotationZ]} />
+            <Hexagon x={-2} y={2} />
+            <Hexagon x={-4} y={2} />
+            <Hexagon x={-6} y={2} />
+            <Hexagon x={-8} y={2} />
+            <Hexagon x={-10} y={2} />
+            <Hexagon x={-12} y={2} />
+            <Hexagon x={-14} y={2} />
+
+            <Hexagon x={13} y={1} />
+            <Hexagon x={11} y={1} />
+            <Hexagon x={9} y={1} />
+            <Hexagon x={7} y={1} />
+            <Hexagon x={5} y={1} />
+            <Hexagon x={3} y={1} />
+            <Hexagon x={1} y={1} />
+            <Hexagon x={-1} y={1} />
+            <Hexagon x={-3} y={1} />
+            <Hexagon x={-5} y={1} />
+            <Hexagon x={-7} y={1} />
+            <Hexagon x={-9} y={1} />
+            <Hexagon x={-11} y={1} />
+            <Hexagon x={-13} y={1} />
+
+            <Hexagon x={14} y={0} />
+            <Hexagon x={12} y={0} />
+            <Hexagon x={10} y={0} />
+            <Hexagon x={8} y={0} />
+            <Hexagon x={6} y={0} />
+            <Hexagon x={4} y={0} />
+            <Hexagon x={2} y={0} />
+            <Hexagon x={0} y={0} />
+            <Hexagon x={-2} y={0} />
+            <Hexagon x={-4} y={0} />
+            <Hexagon x={-6} y={0} />
+            <Hexagon x={-8} y={0} />
+            <Hexagon x={-10} y={0} />
+            <Hexagon x={-12} y={0} />
+            <Hexagon x={-14} y={0} />
+
+            <Hexagon x={13} y={-1} />
+            <Hexagon x={11} y={-1} />
+            <Hexagon x={9} y={-1} />
+            <Hexagon x={7} y={-1} />
+            <Hexagon x={5} y={-1} />
+            <Hexagon x={3} y={-1} />
+            <Hexagon x={1} y={-1} />
+            <Hexagon x={-1} y={-1} />
+            <Hexagon x={-3} y={-1} />
+            <Hexagon x={-5} y={-1} />
+            <Hexagon x={-7} y={-1} />
+            <Hexagon x={-9} y={-1} />
+            <Hexagon x={-11} y={-1} />
+            <Hexagon x={-13} y={-1} />
+
+            <Hexagon x={14} y={-2} />
+            <Hexagon x={12} y={-2} />
+            <Hexagon x={10} y={-2} />
+            <Hexagon x={8} y={-2} />
+            <Hexagon x={6} y={-2} />
+            <Hexagon x={4} y={-2} />
+            <Hexagon x={2} y={-2} />
+            <Hexagon x={0} y={-2} />
+            <Hexagon x={-2} y={-2} />
+            <Hexagon x={-4} y={-2} />
+            <Hexagon x={-6} y={-2} />
+            <Hexagon x={-8} y={-2} />
+            <Hexagon x={-10} y={-2} />
+            <Hexagon x={-12} y={-2} />
+            <Hexagon x={-14} y={-2} />
+
+            <Hexagon x={13} y={-3} />
+            <Hexagon x={11} y={-3} />
+            <Hexagon x={9} y={-3} />
+            <Hexagon x={7} y={-3} />
+            <Hexagon x={5} y={-3} />
+            <Hexagon x={3} y={-3} />
+            <Hexagon x={1} y={-3} />
+            <Hexagon x={-1} y={-3} />
+            <Hexagon x={-3} y={-3} />
+            <Hexagon x={-5} y={-3} />
+            <Hexagon x={-7} y={-3} />
+            <Hexagon x={-9} y={-3} />
+            <Hexagon x={-11} y={-3} />
+            <Hexagon x={-13} y={-3} />
+
+            <Hexagon x={14} y={-4} />
+            <Hexagon x={12} y={-4} />
+            <Hexagon x={10} y={-4} />
+            <Hexagon x={8} y={-4} />
+            <Hexagon x={6} y={-4} />
+            <Hexagon x={4} y={-4} />
+            <Hexagon x={2} y={-4} />
+            <Hexagon x={0} y={-4} />
+            <Hexagon x={-2} y={-4} />
+            <Hexagon x={-4} y={-4} />
+            <Hexagon x={-6} y={-4} />
+            <Hexagon x={-8} y={-4} />
+            <Hexagon x={-10} y={-4} />
+            <Hexagon x={-12} y={-4} />
+            <Hexagon x={-14} y={-4} />
+
+            {/* <OrbitControls makeDefault /> */}
+            <animated.color
+                attach="background"
+                args={[backgroundColor.get()]}
+            />
+            <ambientLight />
+            <pointLight position={[10, 10, 10]} />
+            <OrthographicCamera
+                zoom={20}
+                position={[cameraX, cameraY, cameraZ]}
+                rotation={[rotationX, rotationY, rotationZ]}
+                makeDefault
+            />
+        </>
     );
 };
 
