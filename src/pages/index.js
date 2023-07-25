@@ -6,9 +6,9 @@ import { ScrollControls } from "@react-three/drei";
 const IndexPage = () => {
     return (
         <Canvas style={{ transition: "all 2s ease" }}>
-            <ScrollControls pages={5}>
-                <Composition />
-            </ScrollControls>
+            {/* <ScrollControls pages={5}> */}
+            <Composition />
+            {/* </ScrollControls> */}
         </Canvas>
     );
 };

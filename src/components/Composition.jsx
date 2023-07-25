@@ -106,17 +106,17 @@ const Composition = () => {
 
     const { backgroundColor } = useSpring({
         // backgroundColor: isPhase2 ? "#000000" : "#FFFFFF",
-        backgroundColor: "#000",
+        backgroundColor: "#161616",
     });
 
-    useFrame(() => {
-        const rotationX = 1 - scroll.range(0, 1 / 5);
-        camera.rotation.set(rotationX, 0, 0);
+    // useFrame(() => {
+    //     const rotationX = 1 - scroll.range(0, 1 / 5);
+    //     camera.rotation.set(rotationX, 0, 0);
 
-        console.log(scroll.visible(1 / 5, 5 / 5));
-        console.log(backgroundColor.get());
-        setIsPhase2((_) => scroll.visible(1 / 5, 5 / 5));
-    });
+    //     console.log(scroll.visible(1 / 5, 5 / 5));
+    //     console.log(backgroundColor.get());
+    //     setIsPhase2((_) => scroll.visible(1 / 5, 5 / 5));
+    // });
 
     const { cameraX, cameraY, cameraZ, rotationX, rotationY, rotationZ } =
         useControls({
@@ -139,7 +139,7 @@ const Composition = () => {
                 step: 1,
             },
             rotationX: {
-                value: 1,
+                value: 0,
                 min: -Math.PI,
                 max: Math.PI,
                 step: 0.05,
@@ -200,22 +200,6 @@ const Composition = () => {
                 <meshStandardMaterial color={"white"} />
             </Text3D>
 
-            <Hexagon x={14} y={4} />
-            <Hexagon x={12} y={4} />
-            <Hexagon x={10} y={4} />
-            <Hexagon x={8} y={4} />
-            <Hexagon x={6} y={4} />
-            <Hexagon x={4} y={4} />
-            <Hexagon x={2} y={4} />
-            <Hexagon x={0} y={4} />
-            <Hexagon x={-2} y={4} />
-            <Hexagon x={-4} y={4} />
-            <Hexagon x={-6} y={4} />
-            <Hexagon x={-8} y={4} />
-            <Hexagon x={-10} y={4} />
-            <Hexagon x={-12} y={4} />
-            <Hexagon x={-14} y={4} />
-
             <Hexagon x={13} y={3} />
             <Hexagon x={11} y={3} />
             <Hexagon x={9} y={3} />
@@ -237,110 +221,7 @@ const Composition = () => {
             <Hexagon x={8} y={2} />
             <Hexagon x={6} y={2} />
             <Hexagon x={4} y={2} />
-            <Hexagon x={2} y={2} />
-            <Hexagon x={0} y={2} rotation={[rotationX, rotationY, rotationZ]} />
-            <Hexagon x={-2} y={2} />
-            <Hexagon x={-4} y={2} />
-            <Hexagon x={-6} y={2} />
-            <Hexagon x={-8} y={2} />
-            <Hexagon x={-10} y={2} />
-            <Hexagon x={-12} y={2} />
-            <Hexagon x={-14} y={2} />
 
-            <Hexagon x={13} y={1} />
-            <Hexagon x={11} y={1} />
-            <Hexagon x={9} y={1} />
-            <Hexagon x={7} y={1} />
-            <Hexagon x={5} y={1} />
-            <Hexagon x={3} y={1} />
-            <Hexagon x={1} y={1} />
-            <Hexagon x={-1} y={1} />
-            <Hexagon x={-3} y={1} />
-            <Hexagon x={-5} y={1} />
-            <Hexagon x={-7} y={1} />
-            <Hexagon x={-9} y={1} />
-            <Hexagon x={-11} y={1} />
-            <Hexagon x={-13} y={1} />
-
-            <Hexagon x={14} y={0} />
-            <Hexagon x={12} y={0} />
-            <Hexagon x={10} y={0} />
-            <Hexagon x={8} y={0} />
-            <Hexagon x={6} y={0} />
-            <Hexagon x={4} y={0} />
-            <Hexagon x={2} y={0} />
-            <Hexagon x={0} y={0} />
-            <Hexagon x={-2} y={0} />
-            <Hexagon x={-4} y={0} />
-            <Hexagon x={-6} y={0} />
-            <Hexagon x={-8} y={0} />
-            <Hexagon x={-10} y={0} />
-            <Hexagon x={-12} y={0} />
-            <Hexagon x={-14} y={0} />
-
-            <Hexagon x={13} y={-1} />
-            <Hexagon x={11} y={-1} />
-            <Hexagon x={9} y={-1} />
-            <Hexagon x={7} y={-1} />
-            <Hexagon x={5} y={-1} />
-            <Hexagon x={3} y={-1} />
-            <Hexagon x={1} y={-1} />
-            <Hexagon x={-1} y={-1} />
-            <Hexagon x={-3} y={-1} />
-            <Hexagon x={-5} y={-1} />
-            <Hexagon x={-7} y={-1} />
-            <Hexagon x={-9} y={-1} />
-            <Hexagon x={-11} y={-1} />
-            <Hexagon x={-13} y={-1} />
-
-            <Hexagon x={14} y={-2} />
-            <Hexagon x={12} y={-2} />
-            <Hexagon x={10} y={-2} />
-            <Hexagon x={8} y={-2} />
-            <Hexagon x={6} y={-2} />
-            <Hexagon x={4} y={-2} />
-            <Hexagon x={2} y={-2} />
-            <Hexagon x={0} y={-2} />
-            <Hexagon x={-2} y={-2} />
-            <Hexagon x={-4} y={-2} />
-            <Hexagon x={-6} y={-2} />
-            <Hexagon x={-8} y={-2} />
-            <Hexagon x={-10} y={-2} />
-            <Hexagon x={-12} y={-2} />
-            <Hexagon x={-14} y={-2} />
-
-            <Hexagon x={13} y={-3} />
-            <Hexagon x={11} y={-3} />
-            <Hexagon x={9} y={-3} />
-            <Hexagon x={7} y={-3} />
-            <Hexagon x={5} y={-3} />
-            <Hexagon x={3} y={-3} />
-            <Hexagon x={1} y={-3} />
-            <Hexagon x={-1} y={-3} />
-            <Hexagon x={-3} y={-3} />
-            <Hexagon x={-5} y={-3} />
-            <Hexagon x={-7} y={-3} />
-            <Hexagon x={-9} y={-3} />
-            <Hexagon x={-11} y={-3} />
-            <Hexagon x={-13} y={-3} />
-
-            <Hexagon x={14} y={-4} />
-            <Hexagon x={12} y={-4} />
-            <Hexagon x={10} y={-4} />
-            <Hexagon x={8} y={-4} />
-            <Hexagon x={6} y={-4} />
-            <Hexagon x={4} y={-4} />
-            <Hexagon x={2} y={-4} />
-            <Hexagon x={0} y={-4} />
-            <Hexagon x={-2} y={-4} />
-            <Hexagon x={-4} y={-4} />
-            <Hexagon x={-6} y={-4} />
-            <Hexagon x={-8} y={-4} />
-            <Hexagon x={-10} y={-4} />
-            <Hexagon x={-12} y={-4} />
-            <Hexagon x={-14} y={-4} />
-
-            {/* <OrbitControls makeDefault /> */}
             <animated.color
                 attach="background"
                 args={[backgroundColor.get()]}
