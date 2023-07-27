@@ -6,7 +6,8 @@ import { useSpring, animated } from "@react-spring/three";
 const Hexagon = ({
     rotation = [Math.PI / 2, 0, 0],
     position = [-5, 0, 0],
-    debugColor = "#012E62",
+    debugColor = "#fff",
+    // debugColor = "#012E62",
 }) => {
     const [hovered, setHover] = useState(false);
     const ref = useRef();
@@ -60,26 +61,50 @@ const Hexagons = () => {
 
     return (
         <>
+            {/* <Hexagon position={[0, 0, 0]} rotation={[0, 0, 0]} /> */}
+
+            <Hexagon position={[2, -7, 0]} rotation={[0, Math.PI, 0]} />
+            <Hexagon position={[7, -7, 0]} rotation={[0, Math.PI, 0]} />
+            <Hexagon position={[12, -7, 0]} rotation={[0, Math.PI, 0]} />
+            <Hexagon position={[4.5, -7, 4.5]} rotation={[0, Math.PI, 0]} />
+
+            <Hexagon position={[-5, -14, 0]} rotation={[0, Math.PI, 0]} />
+            <Hexagon position={[-10, -14, 0]} rotation={[0, Math.PI, 0]} />
+            <Hexagon position={[-15, -14, 0]} rotation={[0, Math.PI, 0]} />
+            <Hexagon position={[-20, -14, 0]} rotation={[0, Math.PI, 0]} />
+            <Hexagon position={[-25, -14, 0]} rotation={[0, Math.PI, 0]} />
+            <Hexagon position={[-30, -14, 0]} rotation={[0, Math.PI, 0]} />
+            <Hexagon position={[-35, -14, 0]} rotation={[0, Math.PI, 0]} />
+            <Hexagon position={[0, -14, 0]} rotation={[0, Math.PI, 0]} />
+            <Hexagon position={[5, -14, 0]} rotation={[0, Math.PI, 0]} />
+            <Hexagon position={[10, -14, 0]} rotation={[0, Math.PI, 0]} />
+            <Hexagon position={[15, -14, 0]} rotation={[0, Math.PI, 0]} />
+            <Hexagon position={[20, -14, 0]} rotation={[0, Math.PI, 0]} />
+            <Hexagon position={[25, -14, 0]} rotation={[0, Math.PI, 0]} />
+            <Hexagon position={[30, -14, 0]} rotation={[0, Math.PI, 0]} />
+            <Hexagon position={[35, -14, 0]} rotation={[0, Math.PI, 0]} />
+
             <Hexagon
-                position={[0, 0, 0]}
-                rotation={[0, Math.PI / 2, 0]}
-                debugColor="orange"
+                position={[33, 2, 0]}
+                rotation={[Math.PI / 2, 0, Math.PI / 2]}
+            />
+            <Hexagon
+                position={[33, -3, 0]}
+                rotation={[Math.PI / 2, 0, Math.PI / 2]}
+            />
+            <Hexagon
+                position={[33, -8, 0]}
+                rotation={[Math.PI / 2, 0, Math.PI / 2]}
             />
 
             <Hexagon
-                position={[0, 3, -5]}
-                rotation={[Math.PI / 3, Math.PI / 2, 0]} // 60deg
-                debugColor="orange"
+                position={[33, 7, 0]}
+                rotation={[Math.PI / 2, 0, Math.PI / 2]}
             />
+
             <Hexagon
-                position={[5, 3, 2]}
-                rotation={[-Math.PI / 3, Math.PI, -Math.PI / 3]} // 60deg
-                debugColor="orange"
-            />
-            <Hexagon
-                position={[-5, 3, 2]}
-                rotation={[-Math.PI, 2.65, (-Math.PI * 4) / 3]}
-                debugColor="yellow"
+                position={[33, 12, 0]}
+                rotation={[Math.PI / 2, 0, Math.PI / 2]}
             />
         </>
     );

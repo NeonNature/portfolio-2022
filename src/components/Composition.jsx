@@ -40,7 +40,7 @@ const Composition = () => {
                 position={[0, 0, 15]}
             >
                 hi.
-                <meshStandardMaterial color={"white"} />
+                <meshStandardMaterial color={"#ddd"} />
             </Text3D>
 
             <Text3D
@@ -55,7 +55,58 @@ const Composition = () => {
                 font="/static/fonts/Play_Regular.json"
                 position={[0, -5, 15]}
             >
-                I'm Min Maung Maung
+                I'm
+                <meshStandardMaterial color={"#ddd"} />
+            </Text3D>
+            <Text3D
+                curveSegments={32}
+                bevelEnabled
+                bevelSize={0.04}
+                bevelThickness={0.1}
+                height={0.5}
+                lineHeight={0.5}
+                letterSpacing={-0.06}
+                size={1.5}
+                font="/static/fonts/Play_Regular.json"
+                position={[4, -5, 15]}
+            >
+                Neon
+                <meshStandardMaterial
+                    color={"#2B6ABC"}
+                    emissive={"#2B6ABC"}
+                    emissiveIntensity={2}
+                    toneMapped={false}
+                />
+            </Text3D>
+            <Text3D
+                curveSegments={32}
+                bevelEnabled
+                bevelSize={0.04}
+                bevelThickness={0.1}
+                height={0.5}
+                lineHeight={0.5}
+                letterSpacing={-0.06}
+                size={1.5}
+                font="/static/fonts/Play_Regular.json"
+                position={[10, -5, 15]}
+            >
+                , the Tech Voyager
+                <meshStandardMaterial color={"#ddd"} />
+            </Text3D>
+
+            <Text3D
+                curveSegments={32}
+                bevelEnabled
+                bevelSize={0.04}
+                bevelThickness={0.1}
+                height={0.5}
+                lineHeight={0.5}
+                letterSpacing={-0.06}
+                size={1.5}
+                font="/static/fonts/Play_Regular.json"
+                position={[0, -10, 15]}
+            >
+                Navigating the Digital Frontier!
                 <meshStandardMaterial color={"white"} />
             </Text3D>
 
