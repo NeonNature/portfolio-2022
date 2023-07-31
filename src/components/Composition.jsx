@@ -15,13 +15,14 @@ import Hexagons from "./Hexagons";
 import NavIcon from "./NavIcon";
 import Introduction from "./Introduction";
 import Skills from "./Skills";
+import About from "./About";
 
 const Composition = () => {
     const { backgroundColor } = useSpring({
         backgroundColor: "#161616",
     });
     const [open, setOpen] = useState(false);
-    const [state, setState] = useState("SKILLS");
+    const [state, setState] = useState("ABOUT");
 
     return (
         <>
@@ -37,8 +38,9 @@ const Composition = () => {
 
             <Introduction isActive={state === "INTRO" && !open} />
             <Skills isActive={state === "SKILLS" && !open} />
+            <About isActive={state === "ABOUT" && !open} />
 
-            <Hexagons />
+            <Hexagons state={state} open={open} />
 
             <OrbitControls makeDefault />
 

@@ -44,7 +44,7 @@ const SkillList = [
     "Cross-browser",
 ];
 
-const Word = ({ ...props }) => {
+const Word = ({ text, ...props }) => {
     const color = new THREE.Color();
     const fontProps = {
         font: "/Inter-Bold.woff",
@@ -90,7 +90,7 @@ const Word = ({ ...props }) => {
                 {...props}
                 {...fontProps}
             >
-                {props.text}
+                {text}
             </Text>
 
             <group position={[0, 0, 0]}>
