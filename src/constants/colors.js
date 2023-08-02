@@ -1,29 +1,6 @@
-const colors = [
-    "#fff",
-    "#fff",
-    "#fff",
-    "#fff",
-    "#fff",
-    "#fff",
-    "#fff",
-    "#fff",
-    "#fff",
-    "#fff",
-    "#fff",
-    "#fff",
-    "#fff",
-    "#fff",
-    "#fff",
-    "#fff",
-    "#fff",
-    "#fff",
-    "#fff",
-    "#fff",
-    "#fff",
-    "#fff",
-    "#fff",
-    "#fff",
-];
+const colors = "#fff";
+
+const navColors = "#1f1f1f";
 
 const aboutColors = [
     "#012E62",
@@ -59,11 +36,13 @@ const getColor = (hexagonValue, state, open) => {
         return fallbackColor;
     }
 
-    switch ((state, open)) {
-        case ("ABOUT", false):
+    if (open) return navColors;
+
+    switch (state) {
+        case "ABOUT":
             return aboutColors[hexagonValue];
         default:
-            return colors[hexagonValue];
+            return colors;
     }
 };
 

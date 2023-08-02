@@ -16,6 +16,7 @@ import NavIcon from "./NavIcon";
 import Introduction from "./Introduction";
 import Skills from "./Skills";
 import About from "./About";
+import Menu from "./Menu";
 
 const Composition = () => {
     const { backgroundColor } = useSpring({
@@ -27,14 +28,15 @@ const Composition = () => {
     return (
         <>
             <EffectComposer>
-                <Bloom
-                    luminanceThreshold={0}
-                    luminanceSmoothing={0.9}
-                    // height={300}
-                />
+                <Bloom luminanceThreshold={0} luminanceSmoothing={0.9} />
             </EffectComposer>
 
             <NavIcon open={open} setOpen={setOpen} />
+            <Menu
+                isActive={open}
+                setState={setState}
+                closeMenu={() => setOpen(false)}
+            />
 
             <Introduction isActive={state === "INTRO" && !open} />
             <Skills isActive={state === "SKILLS" && !open} />

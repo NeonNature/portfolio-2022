@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useControls } from "leva";
 import "../styles/composition.scss";
 import { useSpring, animated } from "@react-spring/three";
@@ -7,34 +7,16 @@ import { useThree } from "@react-three/fiber";
 const Line = ({
     rotation = [Math.PI / 2, 0, 0],
     position = [-5, 0, 0],
-    debugColor = "red",
-    // debugColor = "#012E62",
     args = [0.1, 0.1, 10],
 }) => {
-    const [hovered, setHover] = useState(false);
-    const ref = useRef();
-
-    const { color, springPosition, springRotation } = useSpring({
-        color: hovered ? "#2A6ABC" : debugColor,
+    const { springPosition, springRotation } = useSpring({
         springPosition: position,
         springRotation: rotation,
     });
-
     return (
-        <animated.mesh
-            ref={ref}
-            position={springPosition}
-            rotation={springRotation}
-            onPointerOver={(e) => (e.stopPropagation(), setHover(true))}
-            onPointerOut={(e) => setHover(false)}
-        >
+        <animated.mesh position={springPosition} rotation={springRotation}>
             <animated.boxGeometry args={args} />
-            <animated.meshStandardMaterial
-                color={color}
-                // emissive={color}
-                // emissiveIntensity={2}
-                // toneMapped={false}
-            />
+            <animated.meshStandardMaterial color={"red"} />
         </animated.mesh>
     );
 };
@@ -58,11 +40,20 @@ const NavIcon = ({ open, setOpen }) => {
                 : [0, Math.PI / 2, Math.PI / 2],
         });
 
+    const [hovered, setHover] = useState(false);
+
+    useEffect(() => {
+        if (hovered) document.body.style.cursor = "pointer";
+        return () => (document.body.style.cursor = "auto");
+    }, [hovered]);
+
     return (
         <>
             <group
                 position={[-width / 2 + 3, height / 2 - 3, 0]}
                 onClick={(e) => (e.stopPropagation(), setOpen(!open))}
+                onPointerOver={(e) => (e.stopPropagation(), setHover(true))}
+                onPointerOut={(e) => setHover(false)}
                 className="nav-icon"
             >
                 <Line
@@ -80,13 +71,10 @@ const NavIcon = ({ open, setOpen }) => {
                     rotation={rotation3}
                     args={[0.1, 0.1, 1.75]}
                 />
-                <animated.mesh position={[0, 0, 0]}>
-                    <animated.planeGeometry args={[3, 3]} />
-                    <animated.meshStandardMaterial
-                        transparent={true}
-                        opacity={0}
-                    />
-                </animated.mesh>
+                <mesh position={[0, 0, 0]}>
+                    <planeGeometry args={[3, 3]} />
+                    <meshStandardMaterial transparent={true} opacity={0} />
+                </mesh>
             </group>
         </>
     );

@@ -25,11 +25,42 @@ const positions = [
     [33, 12, 0],
 ];
 
+const navPositions = [
+    [28.25, 17.75, 0],
+    [28.25, 6.75, 0],
+    [28.25, -15, 0],
+    [28.25, -4.25, 0],
+
+    [-33, -7, 0],
+    [-33, -12.5, 0],
+    [-9.25, -15.25, 0],
+    [-28.25, -15.25, 0],
+
+    [-23.5, -12.5, 0],
+    [-18.75, -15.25, 0],
+    [-14, -12.5, 0],
+    [-28.25, -4.25, 0],
+    [-23.5, -7, 0],
+
+    [-4.5, -12.5, 0],
+    [0.25, -15.25, 0],
+    [5, -12.5, 0],
+    [9.75, -15.25, 0],
+    [14.5, -12.5, 0],
+    [19.25, -9.75, 0],
+
+    [33, -7, 0],
+    [23.5, -1.5, 0],
+    [23.5, 4, 0],
+    [33, 9.5, 0],
+    [33, 15, 0],
+];
+
 const aboutPositions = [
     [28.25, 12.25, 0],
     [28.25, 6.75, 0],
     [15.25, 12.25, 0],
-    [28.25, -4.25, 4.5],
+    [28.25, -4.25, 0],
     [-5, -14, 0],
     [-10, -14, 0],
     [-15, -14, 0],
@@ -52,6 +83,8 @@ const aboutPositions = [
     [33, 15, 0],
 ];
 
+const skillPosition = [0, 0, 50];
+
 const fallbackPosition = [0, 0, 0];
 
 const getPosition = (hexagonValue, state, open) => {
@@ -59,8 +92,12 @@ const getPosition = (hexagonValue, state, open) => {
         return fallbackPosition;
     }
 
-    switch ((state, open)) {
-        case ("ABOUT", false):
+    if (open) return navPositions[hexagonValue];
+
+    switch (state) {
+        case "SKILLS":
+            return skillPosition;
+        case "ABOUT":
             return aboutPositions[hexagonValue];
         default:
             return positions[hexagonValue];

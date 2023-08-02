@@ -69,11 +69,6 @@ const Word = ({ text, ...props }) => {
             color.set(hovered || clicked ? "#fa2720" : "white"),
             0.1
         );
-
-        const a = clock.getElapsedTime();
-
-        // ref.current.position.x =
-        //     ref.current.position.x + 0.1 * Math.sin(2 * Math.PI * 0.25 * a);
     });
 
     const onClick = () => {
