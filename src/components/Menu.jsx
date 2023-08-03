@@ -73,21 +73,26 @@ const Menu = ({ isActive, setState, closeMenu }) => {
             <MenuLink
                 onClick={() => onMenuClick("INTRO")}
                 text="Home"
-                position={[0, 6, 0]}
+                position={[0, 10, 0]}
             />
 
             <MenuLink
                 onClick={() => onMenuClick("SKILLS")}
                 text="Skills"
-                position={[0, 2, 0]}
+                position={[0, 6, 0]}
             />
 
             <MenuLink
                 onClick={() => onMenuClick("ABOUT")}
                 text="About Me"
-                position={[0, -2, 0]}
+                position={[0, 2, 0]}
             />
 
+            <MenuLink
+                onClick={() => onMenuClick("TESTIMONIALS")}
+                text="Testimonials"
+                position={[0, -2, 0]}
+            />
             <MenuLink
                 onClick={() => {}}
                 disabled

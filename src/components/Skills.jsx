@@ -12,6 +12,7 @@ import {
     PositionalAudio,
 } from "@react-three/drei";
 import * as THREE from "three";
+import { Bloom, EffectComposer } from "@react-three/postprocessing";
 
 const SkillList = [
     "HTML",
@@ -66,7 +67,7 @@ const Word = ({ text, ...props }) => {
     useFrame(({ camera, clock }) => {
         ref.current.quaternion.copy(camera.quaternion);
         ref.current.material.color.lerp(
-            color.set(hovered || clicked ? "#fa2720" : "white"),
+            color.set(hovered || clicked ? "#FFC275" : "white"),
             0.1
         );
     });
@@ -126,16 +127,20 @@ const Skills = ({ isActive }) => {
 
     const ref = useRef();
 
-    const { position, rotation } = useSpring({
-        position: isActive
-            ? [width / 2 - 36, -height / 2 + 17, 0]
-            : [width / 2 - 36, -height / 2 + 17, 50],
-        rotation: isActive ? [0, 0, 0] : [Math.PI, Math.PI, Math.PI],
+    const { position, rotation, visible } = useSpring({
+        position: isActive ? [0, 0, 0] : [0, 0, 50],
+        rotation: isActive ? [0, 0, 0] : [Math.PI, Math.PI, -Math.PI],
+        visible: isActive,
     });
 
     return (
         <>
-            <animated.group position={position} ref={ref}>
+            <animated.group
+                position={position}
+                ref={ref}
+                visible={visible}
+                rotation={rotation}
+            >
                 <SkillWord />
             </animated.group>
         </>

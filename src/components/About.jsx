@@ -24,31 +24,47 @@ const About = ({ isActive }) => {
 
     return (
         <>
-            <animated.group
-                position={position}
-                rotation={rotation}
-                className="nav-icon"
-            >
+            <animated.group position={position} rotation={rotation}>
                 <Image
                     position={[20.5, 9.5, 0]}
                     rotation={[Math.PI / 2, Math.PI / 2, 0]}
                     url="/static/media/avatar.jpeg"
-                    // onClick={click}
-                    // onPointerOver={over}
-                    // onPointerOut={out}
                 >
                     <cylinderGeometry args={[6, 6, 1, 6]} />
                 </Image>
-                <animated.group position={[0, 0, 0]}>
+                <Text
+                    letterSpacing={0.01}
+                    fontSize={1}
+                    color="#fff"
+                    position={[-10, 6, 0]}
+                    font="/static/fonts/Play_Regular.json"
+                >
+                    {text}
+                </Text>
+                <animated.group position={[20.5, 2.5, 0]}>
                     <Text
                         letterSpacing={0.01}
                         fontSize={1}
-                        color="white"
-                        position={[-10, 6, 0]}
+                        color="#fff"
+                        position={[0, 0, 0]}
                         font="/static/fonts/Play_Regular.json"
                     >
-                        {text}
+                        resume
                     </Text>
+                    <animated.mesh
+                        position={[0, -1, 0]}
+                        rotation={[0, Math.PI / 2, Math.PI / 2]}
+                    >
+                        <animated.boxGeometry args={[0.1, 0.1, 1.75]} />
+                        <animated.meshStandardMaterial color={"#fff"} />
+                    </animated.mesh>
+                    <Image
+                        position={[-3, -2, 0]}
+                        rotation={[Math.PI / 2, Math.PI / 2, 0]}
+                        url="/static/media/avatar.jpeg"
+                    >
+                        <cylinderGeometry args={[1, 1, 1, 6]} />
+                    </Image>
                 </animated.group>
             </animated.group>
         </>

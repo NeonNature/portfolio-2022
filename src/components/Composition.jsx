@@ -28,7 +28,7 @@ const Composition = () => {
     return (
         <>
             <EffectComposer>
-                <Bloom luminanceThreshold={0} luminanceSmoothing={0.9} />
+                <Bloom luminanceThreshold={0} luminanceSmoothing={2.3} />
             </EffectComposer>
 
             <NavIcon open={open} setOpen={setOpen} />
