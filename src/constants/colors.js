@@ -29,6 +29,8 @@ const aboutColors = [
     "#012E62",
 ];
 
+const testimonialColors = "#1f1f1f";
+
 const fallbackColor = "#fff";
 
 const getColor = (hexagonValue, state, open) => {
@@ -39,6 +41,8 @@ const getColor = (hexagonValue, state, open) => {
     if (open) return navColors;
 
     switch (state) {
+        case "TESTIMONIALS":
+            return testimonialColors;
         case "ABOUT":
             return aboutColors[hexagonValue];
         default:

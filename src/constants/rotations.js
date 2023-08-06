@@ -25,32 +25,9 @@ const rotations = [
     [Math.PI / 2, 0, Math.PI / 2],
 ];
 
-const navRotations = [
-    [Math.PI / 2, Math.PI / 2, 0],
-    [Math.PI / 2, Math.PI / 2, 0],
-    [Math.PI / 2, Math.PI / 2, 0],
-    [Math.PI / 2, Math.PI / 2, 0],
-    [Math.PI / 2, Math.PI / 2, 0],
-    [Math.PI / 2, Math.PI / 2, 0],
-    [Math.PI / 2, Math.PI / 2, 0],
-    [Math.PI / 2, Math.PI / 2, 0],
-    [Math.PI / 2, Math.PI / 2, 0],
-    [Math.PI / 2, Math.PI / 2, 0],
-    [Math.PI / 2, Math.PI / 2, 0],
-    [Math.PI / 2, Math.PI / 2, 0],
-    [Math.PI / 2, Math.PI / 2, 0],
-    [Math.PI / 2, Math.PI / 2, 0],
-    [Math.PI / 2, Math.PI / 2, 0],
-    [Math.PI / 2, Math.PI / 2, 0],
-    [Math.PI / 2, Math.PI / 2, 0],
-    [Math.PI / 2, Math.PI / 2, 0],
-    [Math.PI / 2, Math.PI / 2, 0],
-    [Math.PI / 2, Math.PI / 2, 0],
-    [Math.PI / 2, Math.PI / 2, 0],
-    [Math.PI / 2, Math.PI / 2, 0],
-    [Math.PI / 2, Math.PI / 2, 0],
-    [Math.PI / 2, Math.PI / 2, 0],
-];
+const navRotations = [Math.PI / 2, Math.PI / 2, 0];
+
+const testimonialRotations = [0, 0, 0];
 
 const aboutRotations = [
     [Math.PI / 2, Math.PI / 2, 0],
@@ -86,9 +63,11 @@ const getRotation = (hexagonValue, state, open) => {
         return fallbackRotation;
     }
 
-    if (open) return navRotations[hexagonValue];
+    if (open) return navRotations;
 
     switch (state) {
+        case "TESTIMONIALS":
+            return testimonialRotations;
         case "ABOUT":
             return aboutRotations[hexagonValue];
         default:

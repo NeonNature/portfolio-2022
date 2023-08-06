@@ -5,6 +5,7 @@ import { useSpring, animated } from "@react-spring/three";
 import getPosition from "../constants/positions";
 import getRotation from "../constants/rotations";
 import getColor from "../constants/colors";
+import useIsMobile from "../hooks/useIsMobile";
 
 const Hexagon = ({
     rotation = [Math.PI / 2, 0, 0],
@@ -14,7 +15,9 @@ const Hexagon = ({
     const [hovered, setHover] = useState(false);
     const ref = useRef();
 
-    const { springColor, springPosition, springRotation } = useSpring({
+    const isMobile = useIsMobile();
+    const { springColor, springPosition, springRotation, scale } = useSpring({
+        scale: isMobile ? 0.5 : 1,
         springColor: hovered ? "#2A6ABC" : color,
         springPosition: position,
         springRotation: rotation,
@@ -22,6 +25,7 @@ const Hexagon = ({
 
     return (
         <animated.mesh
+            scale={scale}
             ref={ref}
             position={springPosition}
             rotation={springRotation}

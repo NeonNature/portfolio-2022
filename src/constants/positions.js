@@ -1,8 +1,8 @@
 const positions = [
-    [2, -7, 0],
-    [7, -7, 0],
-    [12, -7, 0],
-    [4.5, -7, 0],
+    [2, -3, 0],
+    [7, -3, 0],
+    [12, -3, 0],
+    [4.5, -3, 0],
     [-5, -14, 0],
     [-10, -14, 0],
     [-15, -14, 0],
@@ -85,6 +85,38 @@ const aboutPositions = [
 
 const skillPosition = [0, 0, 50];
 
+const testimonialPosition = [
+    [27.5, -14, 0],
+
+    [27.5, -15, 0],
+    [27.5, -16, 0],
+    [27.5, -17, 0],
+    [33, -17, 0],
+
+    [22, -17, 0],
+    [22, -16, 0],
+    [16.5, -17, 0],
+    [16.5, -16, 0],
+
+    [16.5, -15, 0],
+    [11, -17, 0],
+    [11, -16, 0],
+    [11, -15, 0],
+    [11, -14, 0],
+    [5.5, -17, 0],
+
+    [-22, -17, 0],
+    [-22, -16, 0],
+    [-11, -17, 0],
+    [-16.5, -17, 0],
+
+    [-16.5, -16, 0],
+    [-27.5, -17, 0],
+    [-33, -17, 0],
+    [-33, -16, 0],
+    [-33, -15, 0],
+];
+
 const fallbackPosition = [0, 0, 0];
 
 const getPosition = (hexagonValue, state, open) => {
@@ -95,6 +127,8 @@ const getPosition = (hexagonValue, state, open) => {
     if (open) return navPositions[hexagonValue];
 
     switch (state) {
+        case "TESTIMONIALS":
+            return testimonialPosition[hexagonValue];
         case "SKILLS":
             return skillPosition;
         case "ABOUT":

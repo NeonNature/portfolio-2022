@@ -3,11 +3,11 @@ import { useControls } from "leva";
 import "../styles/composition.scss";
 import { useSpring, animated } from "@react-spring/three";
 import { useThree, useFrame } from "@react-three/fiber";
-import { Text3D } from "@react-three/drei";
+import { Text3D, useAspect } from "@react-three/drei";
+import PageLink from "./PageLink";
+import useIsMobile from "../hooks/useIsMobile";
 
-const Introduction = ({ isActive }) => {
-    const { width, height } = useThree((state) => state.viewport);
-
+const Introduction = ({ isActive, setState }) => {
     const mesh = useRef();
 
     useFrame(({ clock }) => {
@@ -26,16 +26,18 @@ const Introduction = ({ isActive }) => {
             amplitude * Math.sin(0.5 * Math.PI * frequency * a);
     });
 
-    const { position, rotation } = useSpring({
-        position: isActive
-            ? [width / 2 - 36, -height / 2 + 17, 0]
-            : [width / 2 - 36, -height / 2 + 17, 50],
+    const isMobile = useIsMobile();
+
+    const { position, rotation, scale } = useSpring({
+        position: isActive ? [isMobile ? -8 : 0, 4, 0] : [0, 4, 50],
         rotation: isActive ? [0, 0, 0] : [Math.PI, Math.PI, Math.PI],
+        scale: isMobile ? 0.5 : 1,
     });
 
     return (
         <>
             <animated.group
+                scale={scale}
                 position={position}
                 rotation={rotation}
                 className="nav-icon"
@@ -50,7 +52,7 @@ const Introduction = ({ isActive }) => {
                     letterSpacing={-0.06}
                     size={1.5}
                     font="/static/fonts/Play_Regular.json"
-                    position={[0, 0, 15]}
+                    position={[0, 0, 0]}
                 >
                     hi.
                     <meshStandardMaterial color={"#ddd"} />
@@ -66,7 +68,7 @@ const Introduction = ({ isActive }) => {
                     letterSpacing={-0.06}
                     size={1.5}
                     font="/static/fonts/Play_Regular.json"
-                    position={[0, -5, 15]}
+                    position={[0, -5, 0]}
                 >
                     I'm
                     <meshStandardMaterial color={"#ddd"} />
@@ -82,8 +84,7 @@ const Introduction = ({ isActive }) => {
                     letterSpacing={-0.06}
                     size={1.5}
                     font="/static/fonts/Play_Regular.json"
-                    position={[4, -5, 15]}
-                    // rotation={[0.25, 0, 0.25]}
+                    position={[4, -5, 0]}
                 >
                     Neon
                     <meshStandardMaterial
@@ -103,7 +104,7 @@ const Introduction = ({ isActive }) => {
                     letterSpacing={-0.06}
                     size={1.5}
                     font="/static/fonts/Play_Regular.json"
-                    position={[10, -5, 15]}
+                    position={[10, -5, 0]}
                 >
                     , the Tech Voyager
                     <meshStandardMaterial color={"#ddd"} />
@@ -119,11 +120,23 @@ const Introduction = ({ isActive }) => {
                     letterSpacing={-0.06}
                     size={1.5}
                     font="/static/fonts/Play_Regular.json"
-                    position={[0, -10, 15]}
+                    position={[0, -10, 0]}
                 >
                     Navigating the Digital Frontier!
                     <meshStandardMaterial color={"white"} />
                 </Text3D>
+
+                <PageLink
+                    position={[4, -13, 0]}
+                    onClick={() => setState("ABOUT")}
+                    text="more about me"
+                />
+
+                <PageLink
+                    position={[20, -13, 0]}
+                    onClick={() => setState("TESTIMONIALS")}
+                    text="see what people say about me!"
+                />
             </animated.group>
         </>
     );
