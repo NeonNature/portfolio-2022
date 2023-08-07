@@ -5,6 +5,7 @@ module.exports = {
     },
     plugins: [
         "gatsby-plugin-sass",
+        "gatsby-plugin-image",
         "gatsby-plugin-sitemap",
         {
             resolve: `gatsby-plugin-google-gtag`,
@@ -17,6 +18,21 @@ module.exports = {
             options: {
                 icon: "src/images/icon.png",
             },
+        },
+        "gatsby-plugin-sharp",
+        {
+            resolve: `gatsby-transformer-sharp`,
+            options: {
+                checkSupportedExtensions: true,
+            },
+        },
+        {
+            resolve: "gatsby-source-filesystem",
+            options: {
+                name: "images",
+                path: "./src/images/",
+            },
+            __key: "images",
         },
     ],
 };
