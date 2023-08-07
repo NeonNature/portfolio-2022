@@ -168,7 +168,7 @@ const ColleagueDetails = ({ position, name, role, url }) => {
                 fontSize={1}
                 color="#fff"
                 position={[0, 0, 0]}
-                font="/static/fonts/Play_Regular.json"
+                font="/Play_Regular.json"
                 onClick={onClick}
                 onPointerOver={(e) => {
                     e.stopPropagation();
@@ -190,7 +190,7 @@ const ColleagueDetails = ({ position, name, role, url }) => {
                 fontSize={1}
                 color="#fff"
                 position={[0, -2, 0]}
-                font="/static/fonts/Play_Regular.json"
+                font="/Play_Regular.json"
                 onClick={onClick}
                 onPointerOver={(e) => {
                     e.stopPropagation();
@@ -307,7 +307,7 @@ const Testimonials = ({ isActive }) => {
                         fontSize={1}
                         color="#fff"
                         position={[0, 0, 0]}
-                        font="/static/fonts/Play_Regular.json"
+                        font="/Play_Regular.json"
                     >
                         {`"${
                             isMobile
@@ -324,13 +324,13 @@ const Testimonials = ({ isActive }) => {
                         url={testimonials[activeTestimonial].url}
                     />
                     <ColleagueIcon
-                        src={`/static/media/testimonial/${testimonials[prevIndex].profile}`}
+                        src={`/${testimonials[prevIndex].profile}`}
                         position={[-3, 2, 0]}
                         onClick={() => setActiveTestimonial(prevIndex)}
                     />
                     <ColleagueIcon
                         isActive
-                        src={`/static/media/testimonial/${testimonials[activeTestimonial].profile}`}
+                        src={`/${testimonials[activeTestimonial].profile}`}
                         rotation={iconRotation}
                         position={[0, 4, 0]}
                         onClick={() =>
@@ -338,7 +338,7 @@ const Testimonials = ({ isActive }) => {
                         }
                     />
                     <ColleagueIcon
-                        src={`/static/media/testimonial/${testimonials[nextIndex].profile}`}
+                        src={`/${testimonials[nextIndex].profile}`}
                         position={[3, 2, 0]}
                         onClick={() => setActiveTestimonial(nextIndex)}
                     />

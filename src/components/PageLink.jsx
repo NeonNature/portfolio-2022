@@ -16,7 +16,7 @@ const PageLink = ({ onClick, position, text }) => {
                 fontSize={1}
                 color="#fff"
                 position={[0, 0, 0]}
-                font="/static/fonts/Play_Regular.json"
+                font="/Play_Regular.json"
                 onClick={onClick}
                 onPointerOver={(e) => {
                     e.stopPropagation();

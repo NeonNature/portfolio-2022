@@ -49,7 +49,7 @@ const Introduction = ({ isActive, setState }) => {
                     lineHeight={0.5}
                     letterSpacing={-0.06}
                     size={1.5}
-                    font="/static/fonts/Play_Regular.json"
+                    font="/Play_Regular.json"
                     position={[0, 0, 0]}
                 >
                     hi.
@@ -65,7 +65,7 @@ const Introduction = ({ isActive, setState }) => {
                     lineHeight={0.5}
                     letterSpacing={-0.06}
                     size={1.5}
-                    font="/static/fonts/Play_Regular.json"
+                    font="/Play_Regular.json"
                     position={[0, -5, 0]}
                 >
                     I'm
@@ -81,7 +81,7 @@ const Introduction = ({ isActive, setState }) => {
                     lineHeight={0.5}
                     letterSpacing={-0.06}
                     size={1.5}
-                    font="/static/fonts/Play_Regular.json"
+                    font="/Play_Regular.json"
                     position={[4, -5, 0]}
                 >
                     Neon
@@ -101,7 +101,7 @@ const Introduction = ({ isActive, setState }) => {
                     lineHeight={0.5}
                     letterSpacing={-0.06}
                     size={1.5}
-                    font="/static/fonts/Play_Regular.json"
+                    font="/Play_Regular.json"
                     position={[10, -5, 0]}
                 >
                     , the Tech Voyager
@@ -117,7 +117,7 @@ const Introduction = ({ isActive, setState }) => {
                     lineHeight={0.5}
                     letterSpacing={-0.06}
                     size={1.5}
-                    font="/static/fonts/Play_Regular.json"
+                    font="/Play_Regular.json"
                     position={[0, -10, 0]}
                 >
                     Navigating the Digital Frontier!

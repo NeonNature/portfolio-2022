@@ -39,7 +39,7 @@ const SkillList = [
 const Word = ({ text, key, position }) => {
     const color = new THREE.Color();
     const fontProps = {
-        font: "/static/fonts/Play_Regular.json",
+        font: "/Play_Regular.json",
         fontSize: 1.5,
         letterSpacing: -0.05,
         lineHeight: 1,
@@ -94,11 +94,7 @@ const Word = ({ text, key, position }) => {
 
             <group position={[0, 0, 0]}>
                 {hovered && (
-                    <PositionalAudio
-                        url={"/static/media/sound1.wav"}
-                        distance={100}
-                        loop
-                    />
+                    <PositionalAudio url={"/sound1.wav"} distance={100} loop />
                 )}
             </group>
         </Float>

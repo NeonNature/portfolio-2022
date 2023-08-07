@@ -13,7 +13,7 @@ const ResumeLink = ({ position }) => {
 
     let onClick = () => {
         window.open(
-            "/static/resume/Min Maung Maung ; Neon - Frontend Developer.pdf",
+            "/Min Maung Maung ; Neon - Frontend Developer.pdf",
             "_blank",
             "noreferrer"
         );
@@ -26,7 +26,7 @@ const ResumeLink = ({ position }) => {
                 fontSize={1}
                 color="#fff"
                 position={[0, 0, 0]}
-                font="/static/fonts/Play_Regular.json"
+                font="/Play_Regular.json"
                 onClick={onClick}
                 onPointerOver={(e) => {
                     e.stopPropagation();
@@ -114,7 +114,7 @@ const About = ({ isActive, setState }) => {
                     <Image
                         position={[0, 0, 0]}
                         rotation={[Math.PI / 2, Math.PI / 2, 0]}
-                        url="/static/media/avatar.jpeg"
+                        url="/avatar.jpeg"
                     >
                         <cylinderGeometry args={[6, 6, 1, 6]} />
                     </Image>
@@ -125,7 +125,7 @@ const About = ({ isActive, setState }) => {
                         fontSize={1}
                         color="#fff"
                         position={[0, 0, 0]}
-                        font="/static/fonts/Play_Regular.json"
+                        font="/Play_Regular.json"
                     >
                         {text}
                     </Text>
@@ -144,17 +144,17 @@ const About = ({ isActive, setState }) => {
                 <animated.group position={resumePosition}>
                     <ResumeLink position={[0, 0, 0]} />
                     <SocialIcon
-                        src="/static/media/linkedin.jpeg"
+                        src="/linkedin.jpeg"
                         position={[-3, -2, 0]}
                         url="https://www.linkedin.com/in/min-maung-maung/"
                     />
                     <SocialIcon
-                        src="/static/media/github.jpeg"
+                        src="/github.jpeg"
                         position={[0, -2, 0]}
                         url="https://github.com/NeonNature"
                     />
                     <SocialIcon
-                        src="/static/media/mail.svg"
+                        src="/mail.svg"
                         position={[3, -2, 0]}
                         url="mailto:mustachemaung@gmail.com"
                     />

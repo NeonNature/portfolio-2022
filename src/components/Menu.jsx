@@ -33,7 +33,7 @@ const MenuLink = ({ onClick, position, text, disabled }) => {
                     letterSpacing={0.01}
                     fontSize={1.5}
                     position={[0, 0, 0]}
-                    font="/static/fonts/Play_Regular.json"
+                    font="/Play_Regular.json"
                 >
                     {text}
                     <animated.meshStandardMaterial color={color} />
@@ -43,7 +43,7 @@ const MenuLink = ({ onClick, position, text, disabled }) => {
                         letterSpacing={0.01}
                         fontSize={0.5}
                         position={[0, -1, 0]}
-                        font="/static/fonts/Play_Regular.json"
+                        font="/Play_Regular.json"
                     >
                         (coming soon!)
                         <animated.meshStandardMaterial color={color} />
