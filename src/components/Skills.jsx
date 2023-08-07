@@ -1,18 +1,8 @@
-import React, { useRef, useState, useEffect, useMemo } from "react";
-import { useControls } from "leva";
-import "../styles/composition.scss";
+import React, { useRef, useState, useEffect } from "react";
 import { useSpring, animated } from "@react-spring/three";
 import { useThree, useFrame } from "@react-three/fiber";
-import {
-    Text3D,
-    Text,
-    Billboard,
-    TrackballControls,
-    Float,
-    PositionalAudio,
-} from "@react-three/drei";
+import { Text, Float, PositionalAudio } from "@react-three/drei";
 import * as THREE from "three";
-import { Bloom, EffectComposer } from "@react-three/postprocessing";
 import useIsMobile from "../hooks/useIsMobile";
 
 const SkillList = [
@@ -49,7 +39,7 @@ const SkillList = [
 const Word = ({ text, key, position }) => {
     const color = new THREE.Color();
     const fontProps = {
-        font: "/Inter-Bold.woff",
+        font: "/static/fonts/Play_Regular.json",
         fontSize: 1.5,
         letterSpacing: -0.05,
         lineHeight: 1,
@@ -58,7 +48,10 @@ const Word = ({ text, key, position }) => {
     const ref = useRef();
     const [hovered, setHovered] = useState(false);
     const [clicked, setClicked] = useState(false);
-    const over = (e) => (e.stopPropagation(), setHovered(true));
+    const over = (e) => {
+        e.stopPropagation();
+        setHovered(true);
+    };
     const out = () => setHovered(false);
     useEffect(() => {
         if (hovered) document.body.style.cursor = "pointer";

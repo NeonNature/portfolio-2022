@@ -1,9 +1,7 @@
-import React, { useRef, useState } from "react";
-import { useControls } from "leva";
-import "../styles/composition.scss";
+import React, { useRef } from "react";
 import { useSpring, animated } from "@react-spring/three";
-import { useThree, useFrame } from "@react-three/fiber";
-import { Text3D, useAspect } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
+import { Text3D } from "@react-three/drei";
 import PageLink from "./PageLink";
 import useIsMobile from "../hooks/useIsMobile";
 

@@ -1,6 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useControls } from "leva";
-import "../styles/composition.scss";
+import React, { useEffect, useState } from "react";
 import { useSpring, animated } from "@react-spring/three";
 import { useThree } from "@react-three/fiber";
 
@@ -51,8 +49,14 @@ const NavIcon = ({ open, setOpen }) => {
         <>
             <group
                 position={[-width / 2 + 3, height / 2 - 3, 0]}
-                onClick={(e) => (e.stopPropagation(), setOpen(!open))}
-                onPointerOver={(e) => (e.stopPropagation(), setHover(true))}
+                onClick={(e) => {
+                    e.stopPropagation();
+                    setOpen(!open);
+                }}
+                onPointerOver={(e) => {
+                    e.stopPropagation();
+                    setHover(true);
+                }}
                 onPointerOut={(e) => setHover(false)}
                 className="nav-icon"
             >

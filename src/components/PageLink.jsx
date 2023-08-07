@@ -1,9 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useControls } from "leva";
-import "../styles/composition.scss";
-import { useSpring, animated } from "@react-spring/three";
-import { useThree, useFrame } from "@react-three/fiber";
-import { Float, Image, Text, Text3D } from "@react-three/drei";
+import React, { useEffect, useState } from "react";
+import { animated } from "@react-spring/three";
+import { Text } from "@react-three/drei";
 
 const PageLink = ({ onClick, position, text }) => {
     const [hovered, setHovered] = useState(false);
@@ -21,7 +18,10 @@ const PageLink = ({ onClick, position, text }) => {
                 position={[0, 0, 0]}
                 font="/static/fonts/Play_Regular.json"
                 onClick={onClick}
-                onPointerOver={(e) => (e.stopPropagation(), setHovered(true))}
+                onPointerOver={(e) => {
+                    e.stopPropagation();
+                    setHovered(true);
+                }}
                 onPointerOut={() => setHovered(false)}
             >
                 {text}

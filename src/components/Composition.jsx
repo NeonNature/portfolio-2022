@@ -1,15 +1,7 @@
-import React, { Suspense, useRef, useState, useEffect } from "react";
-import { useThree, useFrame } from "@react-three/fiber";
-import {
-    OrthographicCamera,
-    OrbitControls,
-    Text3D,
-    Html,
-    useScroll,
-} from "@react-three/drei";
-import { useControls } from "leva";
-import { EffectComposer, Bloom } from "@react-three/postprocessing";
+import React, { useState } from "react";
+import { OrthographicCamera } from "@react-three/drei";
 import "../styles/composition.scss";
+import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import { useSpring, animated } from "@react-spring/three";
 import Hexagons from "./Hexagons";
 import NavIcon from "./NavIcon";
@@ -25,7 +17,7 @@ const Composition = () => {
         backgroundColor: "#161616",
     });
     const [open, setOpen] = useState(false);
-    const [state, setState] = useState("TESTIMONIALS");
+    const [state, setState] = useState("INTRO");
 
     const isMobile = useIsMobile();
 

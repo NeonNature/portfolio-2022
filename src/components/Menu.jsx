@@ -1,13 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useControls } from "leva";
-import "../styles/composition.scss";
+import React, { useEffect, useState } from "react";
 import { useSpring, animated } from "@react-spring/three";
-import { useThree, useFrame } from "@react-three/fiber";
-import { Float, Image, Text, Text3D } from "@react-three/drei";
+import { Float, Text } from "@react-three/drei";
 
 const MenuLink = ({ onClick, position, text, disabled }) => {
     const [hovered, setHovered] = useState(false);
-    const over = (e) => (e.stopPropagation(), setHovered(true));
+    const over = (e) => {
+        e.stopPropagation();
+        setHovered(true);
+    };
     const out = () => setHovered(false);
     useEffect(() => {
         if (hovered) document.body.style.cursor = "pointer";
@@ -22,7 +22,10 @@ const MenuLink = ({ onClick, position, text, disabled }) => {
         <Float>
             <group
                 position={position}
-                onClick={(e) => (e.stopPropagation(), onClick())}
+                onClick={(e) => {
+                    e.stopPropagation();
+                    onClick();
+                }}
                 onPointerOver={over}
                 onPointerOut={out}
             >
@@ -56,8 +59,6 @@ const MenuLink = ({ onClick, position, text, disabled }) => {
 };
 
 const Menu = ({ isActive, setState, closeMenu }) => {
-    const { width, height } = useThree((state) => state.viewport);
-
     const { position, rotation } = useSpring({
         position: isActive ? [0, 2, 0] : [0, 0, 50],
         rotation: isActive ? [0, 0, 0] : [Math.PI, Math.PI, Math.PI],

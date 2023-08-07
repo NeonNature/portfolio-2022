@@ -1,9 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { useControls } from "leva";
-import "../styles/composition.scss";
 import { useSpring, animated } from "@react-spring/three";
-import { useThree, useFrame } from "@react-three/fiber";
-import { Float, Image, Text, Text3D } from "@react-three/drei";
+import { Image, Text } from "@react-three/drei";
 import useIsMobile from "../hooks/useIsMobile";
 
 const testimonials = [
@@ -173,7 +170,10 @@ const ColleagueDetails = ({ position, name, role, url }) => {
                 position={[0, 0, 0]}
                 font="/static/fonts/Play_Regular.json"
                 onClick={onClick}
-                onPointerOver={(e) => (e.stopPropagation(), setHovered(true))}
+                onPointerOver={(e) => {
+                    e.stopPropagation();
+                    setHovered(true);
+                }}
                 onPointerOut={() => setHovered(false)}
             >
                 {name}
@@ -192,7 +192,10 @@ const ColleagueDetails = ({ position, name, role, url }) => {
                 position={[0, -2, 0]}
                 font="/static/fonts/Play_Regular.json"
                 onClick={onClick}
-                onPointerOver={(e) => (e.stopPropagation(), setHovered(true))}
+                onPointerOver={(e) => {
+                    e.stopPropagation();
+                    setHovered(true);
+                }}
                 onPointerOut={() => setHovered(false)}
             >
                 {role}
@@ -218,7 +221,10 @@ const ColleagueIcon = ({
         <animated.group
             rotation={rotation}
             onClick={onClick}
-            onPointerOver={(e) => (e.stopPropagation(), setHovered(true))}
+            onPointerOver={(e) => {
+                e.stopPropagation();
+                setHovered(true);
+            }}
             onPointerOut={() => setHovered(false)}
         >
             <Image
@@ -254,14 +260,14 @@ const Testimonials = ({ isActive }) => {
             }
         }, 10000);
         return () => clearInterval(interval);
-    }, [activeTestimonial]);
+    }, [activeTestimonial, lastIndex]);
 
     const prevIndex = useMemo(() => {
         if (activeTestimonial === 0) {
             return lastIndex;
         }
         return activeTestimonial - 1;
-    }, [activeTestimonial]);
+    }, [activeTestimonial, lastIndex]);
 
     const nextIndex = useMemo(() => {
         if (activeTestimonial === lastIndex) {
@@ -269,7 +275,7 @@ const Testimonials = ({ isActive }) => {
         }
 
         return activeTestimonial + 1;
-    }, [activeTestimonial]);
+    }, [activeTestimonial, lastIndex]);
 
     let openUrl = (url) => window.open(url, "_blank", "noreferrer");
 
@@ -280,17 +286,10 @@ const Testimonials = ({ isActive }) => {
 
     const isMobile = useIsMobile();
 
-    const {
-        textRotation,
-        iconRotation,
-        textPosition,
-        textScale,
-        iconPosition,
-    } = useSpring({
+    const { textRotation, iconRotation, textScale, iconPosition } = useSpring({
         textRotation: [rotationalValue, 0, 0],
         iconRotation: [0, rotationalValue, 0],
         iconPosition: isMobile ? [0, -15, 0] : [15.5, -9, 0],
-        textPosition: isMobile ? [0, 5, 0] : [0, 5, 0],
         textScale: isMobile ? 0.75 : 1,
     });
 

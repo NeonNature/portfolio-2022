@@ -16,4 +16,4 @@ const IndexPage = () => {
 
 export default IndexPage;
 
-export const Head = () => <title>Portfolio 2022</title>;
+export const Head = () => <title>Neon - Tech Voyager</title>;

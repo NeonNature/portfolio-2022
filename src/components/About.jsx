@@ -1,9 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useControls } from "leva";
-import "../styles/composition.scss";
+import React, { useEffect, useState } from "react";
 import { useSpring, animated } from "@react-spring/three";
-import { useThree, useFrame } from "@react-three/fiber";
-import { Float, Image, Text, Text3D } from "@react-three/drei";
+import { Float, Image, Text } from "@react-three/drei";
 import useIsMobile from "../hooks/useIsMobile";
 import PageLink from "./PageLink";
 
@@ -31,7 +28,10 @@ const ResumeLink = ({ position }) => {
                 position={[0, 0, 0]}
                 font="/static/fonts/Play_Regular.json"
                 onClick={onClick}
-                onPointerOver={(e) => (e.stopPropagation(), setHovered(true))}
+                onPointerOver={(e) => {
+                    e.stopPropagation();
+                    setHovered(true);
+                }}
                 onPointerOut={() => setHovered(false)}
             >
                 resume
@@ -62,7 +62,10 @@ const SocialIcon = ({ position, src, url }) => {
         <Float>
             <group
                 onClick={onClick}
-                onPointerOver={(e) => (e.stopPropagation(), setHovered(true))}
+                onPointerOver={(e) => {
+                    e.stopPropagation();
+                    setHovered(true);
+                }}
                 onPointerOut={() => setHovered(false)}
             >
                 <Image

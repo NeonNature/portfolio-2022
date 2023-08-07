@@ -1,6 +1,4 @@
 import React, { useCallback, useMemo, useRef, useState } from "react";
-import { useControls } from "leva";
-import "../styles/composition.scss";
 import { useSpring, animated } from "@react-spring/three";
 import getPosition from "../constants/positions";
 import getRotation from "../constants/rotations";
@@ -29,7 +27,10 @@ const Hexagon = ({
             ref={ref}
             position={springPosition}
             rotation={springRotation}
-            onPointerOver={(e) => (e.stopPropagation(), setHover(true))}
+            onPointerOver={(e) => {
+                e.stopPropagation();
+                setHover(true);
+            }}
             onPointerOut={(e) => setHover(false)}
         >
             <animated.cylinderGeometry args={[3, 3, 1, 6]} />
@@ -78,7 +79,7 @@ const Hexagons = ({ state, open }) => {
         }
 
         return hexagonComponents;
-    }, [state, open]);
+    }, [getHexColor, getHexPosition, getHexRotation]);
 
     return hexagons;
 };
