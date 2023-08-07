@@ -27,21 +27,14 @@
         "animejs": "^3.2.1",
         "gatsby": "^5.11.0",
         "gatsby-plugin-google-gtag": "^5.11.0",
-        "gatsby-plugin-image": "^2.25.0",
         "gatsby-plugin-manifest": "^5.11.0",
         "gatsby-plugin-sass": "^6.11.0",
-        "gatsby-plugin-sharp": "^4.25.1",
         "gatsby-plugin-sitemap": "^6.11.0",
-        "gatsby-source-filesystem": "^4.25.0",
-        "gatsby-transformer-sharp": "^4.25.0",
         "gsap": "^3.11.3",
         "leva": "^0.9.31",
         "react": "^18.1.0",
         "react-dom": "^18.1.0",
         "sass": "^1.55.0",
         "three": "^0.145.0"
-    },
-    "engines": {
-        "node": "18.x"
     }
 }
