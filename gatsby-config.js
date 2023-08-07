@@ -20,7 +20,13 @@ module.exports = {
             },
         },
         "gatsby-plugin-sharp",
-        "gatsby-transformer-sharp",
+        {
+            resolve: `gatsby-transformer-sharp`,
+            options: {
+                checkSupportedExtensions: true,
+            },
+        },
+        ,
         {
             resolve: "gatsby-source-filesystem",
             options: {
