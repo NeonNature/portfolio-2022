@@ -4,6 +4,7 @@ import "../styles/composition.scss";
 import { useSpring, animated } from "@react-spring/three";
 import { useThree, useFrame } from "@react-three/fiber";
 import { Float, Image, Text, Text3D } from "@react-three/drei";
+import useIsMobile from "../hooks/useIsMobile";
 
 const testimonials = [
     {
@@ -19,6 +20,13 @@ const testimonials = [
             "the future.",
         profile: "hunter.jpeg",
         url: "https://www.linkedin.com/in/hunter-williams-3aa11a22/",
+        short:
+            "He delivers quality code and when it can be \n " +
+            "improved he takes feedback with a smile. \n \n " +
+            "This feedback is immediately results in \n " +
+            "better code for that issue and  \n " +
+            "continues to use it on other issues. \n " +
+            "I'm quite happy to have had him on the team. ",
     },
     {
         name: "Benjamin S Powell",
@@ -30,16 +38,31 @@ const testimonials = [
             "any project.",
         profile: "ben.jpeg",
         url: "https://www.linkedin.com/in/benjaminspowell/",
+        short:
+            "It has been a real pleasure working with Neon, \n " +
+            "He was an amazing addition to the team and \n " +
+            "brought to the role a dedication and talent \n " +
+            "that far exceeds expectations. \n\n " +
+            "I can not recommend him highly enough to any \n " +
+            "role that he is considered for and I believe \n " +
+            "he is an asset to any project.",
     },
     {
         name: "Zaw Kyi Han Htoo",
         role: "General Manager, Appvantage Asia",
         testimonial:
             "I've know Min since 2019. Min was a great professional to work with. He has exhibited consistency in his \n " +
-            "ability to remain comitted and focused. I recommend Min highly and look forward to working together in \n " +
+            "ability to remain committed and focused. I recommend Min highly and look forward to working together in \n " +
             "future.",
         profile: "htoo.jpeg",
         url: "https://www.linkedin.com/in/zaw-kyi-han-htoo-06ab94a7/",
+        short:
+            "I've know Min since 2019. Min was a great \n " +
+            "professional to work with. He has exhibited \n " +
+            "consistency in his ability to remain committed \n " +
+            "and focused. \n \n " +
+            "I recommend Min highly and look forward to working \n " +
+            "together in future.",
     },
 
     {
@@ -58,6 +81,19 @@ const testimonials = [
             "new technologies.I have no doubt that he will be an asset to any company he's joining next.",
         profile: "clara.jpeg",
         url: "https://www.linkedin.com/in/clarageous/",
+        short:
+            "While working together on a tight deadline \n " +
+            "for a large- scale digital transformation \n " +
+            "project, he was able to fully understand my \n " +
+            "design requirements and translate them into \n " +
+            "web applications swiftly with little to no \n" +
+            "hiccups. \n\n" +
+            "He ensured that every corner case and edge \n " +
+            "scenario was accounted for in his code and \n " +
+            "when we tested it out, it was bug-free. \n " +
+            "When there was a scope creep, he would  \n " +
+            "roll up his sleeves to get the code done in \n" +
+            "no time.",
     },
     {
         name: "Sarada Lakshmi",
@@ -77,10 +113,17 @@ const testimonials = [
             "to work with him as a team. He will be a great asset wherever he belongs.",
         profile: "sarada.jpeg",
         url: "https://www.linkedin.com/in/sarada-lakshmi-medapati-7150b218/",
+        short:
+            "During his service, he had been found \n " +
+            "very sincere, reliable, trustworthy, \n " +
+            "sociable, and pleasant. Many of our \n" +
+            "staff members were pleased to work with \n " +
+            "to work with him as a team. \n\n" +
+            "He will be a great asset wherever he belongs.",
     },
     {
         name: "Waing La Min Lwin",
-        role: "Software Engineer/ Co-Founder, Lankyone",
+        role: "Co-Founder, Lankyone",
         testimonial:
             "Min is the kind of developer you'd love to work together, whether the business is a startup or a big \n " +
             "corporation.His talent, passion, and creativity are what made him stand out as an outstanding talent. \n \n" +
@@ -96,6 +139,17 @@ const testimonials = [
             "great talent for whatever company he's working in or joining next.",
         profile: "waing.jpeg",
         url: "https://www.linkedin.com/in/wlmlwin/",
+        short:
+            "Min is also a person who thinks differently. \n " +
+            "He would bring unforeseen perspectives to  \n " +
+            "the table, allowing us to develop our products \n " +
+            "with a broader range of considerations for \n " +
+            "users eventually resulting in products \n " +
+            "with better and more unique qualities. \n\n" +
+            "I've seen him learning continuously and \n " +
+            "performing diligently at a top level for \n " +
+            "years, so I think he'll be a great talent for \n " +
+            "whatever company he's working in or joining next.",
     },
 ];
 
@@ -181,12 +235,8 @@ const ColleagueIcon = ({
 };
 
 const Testimonials = ({ isActive }) => {
-    const { width, height } = useThree((state) => state.viewport);
-
     const { position, rotation } = useSpring({
-        position: isActive
-            ? [width / 2 - 36, -height / 2 + 17, 0]
-            : [width / 2 - 36, -height / 2 + 17, 50],
+        position: isActive ? [0, 0, 0] : [0, 0, 50],
         rotation: isActive ? [0, 0, 0] : [Math.PI, Math.PI, Math.PI],
     });
 
@@ -228,15 +278,27 @@ const Testimonials = ({ isActive }) => {
         [activeTestimonial]
     );
 
-    const { textRotation, iconRotation } = useSpring({
+    const isMobile = useIsMobile();
+
+    const {
+        textRotation,
+        iconRotation,
+        textPosition,
+        textScale,
+        iconPosition,
+    } = useSpring({
         textRotation: [rotationalValue, 0, 0],
         iconRotation: [0, rotationalValue, 0],
+        iconPosition: isMobile ? [0, -15, 0] : [15.5, -9, 0],
+        textPosition: isMobile ? [0, 5, 0] : [0, 5, 0],
+        textScale: isMobile ? 0.75 : 1,
     });
 
     return (
         <>
             <animated.group position={position} rotation={rotation}>
                 <animated.group
+                    scale={textScale}
                     position={[0, 5, 0]}
                     ref={textMesh}
                     rotation={textRotation}
@@ -248,10 +310,14 @@ const Testimonials = ({ isActive }) => {
                         position={[0, 0, 0]}
                         font="/static/fonts/Play_Regular.json"
                     >
-                        {`"${testimonials[activeTestimonial].testimonial}"`}
+                        {`"${
+                            isMobile
+                                ? testimonials[activeTestimonial].short
+                                : testimonials[activeTestimonial].testimonial
+                        }"`}
                     </Text>
                 </animated.group>
-                <animated.group position={[15.5, -9, 0]}>
+                <animated.group position={iconPosition}>
                     <ColleagueDetails
                         position={[0, 0, 0]}
                         name={testimonials[activeTestimonial].name}
@@ -262,7 +328,6 @@ const Testimonials = ({ isActive }) => {
                         src={`/static/media/testimonial/${testimonials[prevIndex].profile}`}
                         position={[-3, 2, 0]}
                         onClick={() => setActiveTestimonial(prevIndex)}
-                        // rotation={iconRotation}
                     />
                     <ColleagueIcon
                         isActive
@@ -275,7 +340,6 @@ const Testimonials = ({ isActive }) => {
                     />
                     <ColleagueIcon
                         src={`/static/media/testimonial/${testimonials[nextIndex].profile}`}
-                        // rotation={iconRotation}
                         position={[3, 2, 0]}
                         onClick={() => setActiveTestimonial(nextIndex)}
                     />

@@ -25,7 +25,7 @@ const Composition = () => {
         backgroundColor: "#161616",
     });
     const [open, setOpen] = useState(false);
-    const [state, setState] = useState("SKILLS");
+    const [state, setState] = useState("TESTIMONIALS");
 
     const isMobile = useIsMobile();
 

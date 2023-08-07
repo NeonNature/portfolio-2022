@@ -13,6 +13,7 @@ import {
 } from "@react-three/drei";
 import * as THREE from "three";
 import { Bloom, EffectComposer } from "@react-three/postprocessing";
+import useIsMobile from "../hooks/useIsMobile";
 
 const SkillList = [
     "HTML",
@@ -45,7 +46,7 @@ const SkillList = [
     "Cross-browser",
 ];
 
-const Word = ({ text, ...props }) => {
+const Word = ({ text, key, position }) => {
     const color = new THREE.Color();
     const fontProps = {
         font: "/Inter-Bold.woff",
@@ -76,18 +77,27 @@ const Word = ({ text, ...props }) => {
         setClicked(true);
     };
 
+    const isMobile = useIsMobile();
+
+    const { scale } = useSpring({
+        scale: isMobile ? 0.5 : 1,
+    });
+
     return (
         <Float>
-            <Text
-                ref={ref}
-                onPointerOver={over}
-                onPointerOut={out}
-                onClick={onClick}
-                {...props}
-                {...fontProps}
-            >
-                {text}
-            </Text>
+            <animated.group position={position} scale={scale}>
+                <Text
+                    position={[0, 0, 0]}
+                    ref={ref}
+                    onPointerOver={over}
+                    onPointerOut={out}
+                    onClick={onClick}
+                    key={key}
+                    {...fontProps}
+                >
+                    {text}
+                </Text>
+            </animated.group>
 
             <group position={[0, 0, 0]}>
                 {hovered && (
@@ -123,8 +133,6 @@ const SkillWord = () => {
 };
 
 const Skills = ({ isActive }) => {
-    const { width, height } = useThree((state) => state.viewport);
-
     const ref = useRef();
 
     const { position, rotation, visible } = useSpring({
