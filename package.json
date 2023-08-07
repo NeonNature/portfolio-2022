@@ -1,39 +1,44 @@
 {
-  "name": "portfolio-2022",
-  "version": "1.0.0",
-  "private": true,
-  "description": "portfolio-2022",
-  "author": "NeonNature",
-  "keywords": [
-    "gatsby"
-  ],
-  "scripts": {
-    "develop": "gatsby develop",
-    "start": "gatsby develop",
-    "build": "gatsby build",
-    "serve": "gatsby serve",
-    "clean": "gatsby clean"
-  },
-  "dependencies": {
-    "@react-spring/three": "^9.5.5",
-    "@react-three/drei": "^9.34.4",
-    "@react-three/fiber": "^8.8.10",
-    "@react-three/postprocessing": "^2.6.2",
-    "animejs": "^3.2.1",
-    "gatsby": "^4.24.4",
-    "gatsby-plugin-google-analytics": "^4.24.0",
-    "gatsby-plugin-image": "^2.24.0",
-    "gatsby-plugin-manifest": "^4.24.0",
-    "gatsby-plugin-sass": "^5.24.0",
-    "gatsby-plugin-sharp": "^4.24.0",
-    "gatsby-plugin-sitemap": "^5.24.0",
-    "gatsby-source-filesystem": "^4.24.0",
-    "gatsby-transformer-sharp": "^4.24.0",
-    "gsap": "^3.11.3",
-    "leva": "^0.9.31",
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0",
-    "sass": "^1.55.0",
-    "three": "^0.145.0"
-  }
+    "name": "portfolio-2022",
+    "version": "1.0.0",
+    "private": true,
+    "description": "Portfolio of Min Maung Maung / Neon",
+    "author": "Min Maung Maung / Neon",
+    "keywords": [
+        "neon",
+        "min maung maung",
+        "frontend developer",
+        "developer",
+        "portfolio",
+        "tech voyager"
+    ],
+    "scripts": {
+        "develop": "gatsby develop",
+        "start": "gatsby develop",
+        "build": "gatsby build",
+        "serve": "gatsby serve",
+        "clean": "gatsby clean"
+    },
+    "dependencies": {
+        "@react-spring/three": "^9.5.5",
+        "@react-three/drei": "^9.34.4",
+        "@react-three/fiber": "^8.8.10",
+        "@react-three/postprocessing": "^2.6.2",
+        "animejs": "^3.2.1",
+        "gatsby": "^5.11.0",
+        "gatsby-plugin-google-gtag": "^5.11.0",
+        "gatsby-plugin-image": "^2.24.0",
+        "gatsby-plugin-manifest": "^4.24.0",
+        "gatsby-plugin-sass": "^5.24.0",
+        "gatsby-plugin-sharp": "^4.24.0",
+        "gatsby-plugin-sitemap": "^5.24.0",
+        "gatsby-source-filesystem": "^4.24.0",
+        "gatsby-transformer-sharp": "^4.24.0",
+        "gsap": "^3.11.3",
+        "leva": "^0.9.31",
+        "react": "^18.1.0",
+        "react-dom": "^18.1.0",
+        "sass": "^1.55.0",
+        "three": "^0.145.0"
+    }
 }
