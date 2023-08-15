@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSpring, animated } from "@react-spring/three";
 import { Float, Image, Text } from "@react-three/drei";
 import useIsMobile from "../hooks/useIsMobile";
-import PageLink from "./PageLink";
+import PageLink from "../components/PageLink";
 
 const ResumeLink = ({ position }) => {
     const [hovered, setHovered] = useState(false);

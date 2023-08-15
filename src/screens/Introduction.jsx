@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { useSpring, animated } from "@react-spring/three";
 import { useFrame } from "@react-three/fiber";
 import { Text3D } from "@react-three/drei";
-import PageLink from "./PageLink";
+import PageLink from "../components/PageLink";
 import useIsMobile from "../hooks/useIsMobile";
 
 const Introduction = ({ isActive, setState }) => {

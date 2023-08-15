@@ -5,11 +5,11 @@ import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import { useSpring, animated } from "@react-spring/three";
 import Hexagons from "./Hexagons";
 import NavIcon from "./NavIcon";
-import Introduction from "./Introduction";
-import Skills from "./Skills";
-import About from "./About";
+import Introduction from "../screens/Introduction";
+import Skills from "../screens/Skills";
+import About from "../screens/About";
 import Menu from "./Menu";
-import Testimonials from "./Testimonials";
+import Testimonials from "../screens/Testimonials";
 import useIsMobile from "../hooks/useIsMobile";
 
 const Composition = () => {
